@@ -68,12 +68,70 @@ jobs:
         run: npm ci
 
       - name: Build Windows installer
-        run: npm run electron:make
+        run: npm run electron:make:windows
 
       - name: Upload Windows installer
         uses: actions/upload-artifact@v4
         with:
           name: stockflow-windows-installer
           path: release/*.exe
+          if-no-files-found: error
+          retention-days: 14
+
+  macos-installer:
+    name: macOS universal packages
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build macOS packages
+        run: npm run electron:make:macos
+
+      - name: Upload macOS packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockflow-macos-universal
+          path: |
+            release/*.dmg
+            release/*.zip
+          if-no-files-found: error
+          retention-days: 14
+
+  linux-installer:
+    name: Linux x64 packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Linux packages
+        run: npm run electron:make:linux
+
+      - name: Upload Linux packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockflow-linux-x64
+          path: |
+            release/*.AppImage
+            release/*.deb
           if-no-files-found: error
           retention-days: 14

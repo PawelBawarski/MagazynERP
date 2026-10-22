@@ -13,8 +13,13 @@ Install dependencies with `npm install`, then run `npm start`. The web app is se
 Run `npm run electron:dev` to start Angular and open the Electron desktop window.
 
 - `npm run electron:build:web` builds the Angular renderer with relative asset URLs for desktop packaging.
-- `npm run electron:pack` creates an unpacked desktop app for local testing.
-- `npm run electron:make` creates a Windows installer.
+- `npm run electron:pack` creates an unpacked desktop app for local testing without attempting to publish a release.
+- `npm run electron:make:windows` creates a Windows NSIS installer with a setup wizard, installation-directory selection, Start menu and desktop shortcuts, and an uninstaller available through Windows installed apps.
+- `npm run electron:make:macos` creates universal macOS DMG and ZIP packages for Intel and Apple Silicon Macs. Install by dragging the app to Applications; uninstall by removing the app.
+- `npm run electron:make:linux` creates x64 AppImage and DEB packages. AppImage is removed by deleting the file; DEB packages can be removed using the system package manager.
+- `npm run electron:make` builds the native package for the current host operating system.
+
+GitHub Actions builds each platform on its native runner and uploads separate downloadable artifacts. macOS packages are not signed or notarized, so macOS may show a Gatekeeper warning; signing requires Apple developer credentials. The packages are separate per operating system, not one installer shared by all systems.
 
 Electron's main process is in `electron/main.cjs`. Renderer navigation uses hash-based routing so it also works when loaded from a local packaged file. Keep Electron APIs out of the renderer; add a narrowly scoped, reviewed preload bridge only when a concrete desktop capability requires one.
 
@@ -217,7 +222,7 @@ Run the standard build after application changes:
 npm run build
 ```
 
-This runs `ng build`. The Angular workspace defaults this target to the production configuration, which optimizes output and checks the configured bundle and component-style budgets. The generated browser application is under `dist/stockflow/browser/`. A development build can be checked separately with `npx ng build --configuration development`; `npm run watch` rebuilds the development configuration when files change.
+This runs `ng build`. The Angular workspace defaults this target to the production configuration, which optimizes output and checks the configured bundle and component-style budgets. The generated browser application is under `dist/stockflow/browser/`. Serve it over HTTP; opening the generated `index.html` directly as a `file://` URL is not a valid web-app check. Use `npm start` for development or deploy the build directory to a web host. A development build can be checked separately with `npx ng build --configuration development`; `npm run watch` rebuilds the development configuration when files change.
 
 ### 3. Build and package Electron when desktop behavior is affected
 
@@ -242,7 +247,9 @@ npm run electron:make
 Two workflows run automatically on every push and pull request, and can also be started manually from the GitHub Actions tab:
 
 - [`AngularTests`](./.github/workflows/AngularTests.yml) runs the Angular frontend unit tests.
-- [`BuildDevelop`](./.github/workflows/BuildDevelop.yml) builds the production web app and Electron renderer, creates a Windows Electron installer, and uploads downloadable artifacts retained for 14 days.
+- [`BuildDevelop`](./.github/workflows/BuildDevelop.yml) builds the production web app and Electron renderer, creates Windows, macOS, and Linux packages without publishing a GitHub release, and uploads downloadable artifacts retained for 14 days.
+
+`BuildDevelop` validates and stores the web build as an Actions artifact; it does not deploy the website or make it available at a public URL. Downloading and opening its `index.html` directly will not run the app. Use `npm start` for a local browser check, or configure a hosting/deployment workflow to publish it online.
 
 To use it, push this workflow to GitHub, then open the repository's **Actions** tab to follow job results and download artifacts. Pull requests show the workflow status as a required/failed check; branch protection can be configured in GitHub repository settings if merges should be blocked when checks fail.
 
