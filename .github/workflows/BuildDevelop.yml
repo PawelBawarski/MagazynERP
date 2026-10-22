@@ -1,0 +1,79 @@
+name: BuildDevelop
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-develop-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-build:
+    name: Production web and Electron renderer builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production web app
+        run: npm run build
+
+      - name: Build Electron renderer
+        run: npm run electron:build:web
+
+      - name: Upload web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockflow-web
+          path: dist/stockflow/browser/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload Electron renderer
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockflow-electron-renderer
+          path: dist/stockflow-electron/browser/
+          if-no-files-found: error
+          retention-days: 14
+
+  windows-installer:
+    name: Windows Electron installer
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Windows installer
+        run: npm run electron:make
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockflow-windows-installer
+          path: release/*.exe
+          if-no-files-found: error
+          retention-days: 14

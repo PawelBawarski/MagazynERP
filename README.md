@@ -148,33 +148,113 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
-## Building
+## Frontend unit-test workflow
 
-To build the project run:
+StockFlow runs unit tests through Angular CLI with [Vitest](https://vitest.dev/) and JSDOM. Tests are TypeScript files named `*.spec.ts` under `src/`; no browser provider or live API is required.
 
-```bash
-ng build
-```
+### 1. Install dependencies
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+After a fresh checkout or dependency changes, install the versions recorded in the lockfile:
 
 ```bash
-ng test
+npm ci
 ```
 
-## Running end-to-end tests
+### 2. Choose behavior to verify
 
-For end-to-end (e2e) testing, run:
+Before writing a test, identify the user-visible behavior and its expected result. Follow the neighboring spec and choose a test style that matches the code:
+
+- Test pure calculations and transformations by calling the function directly.
+- Use Angular `TestBed` when dependency injection or a service's Angular integration matters.
+- Use a component fixture to exercise rendered content and user interactions.
+- Use Angular HTTP testing utilities to verify requests and controlled responses; never call a live API from a unit test.
+
+Prefer observable behavior over private implementation details. Cover representative success and relevant empty, invalid-input, denied-access, and error cases. For permissions, inventory, and financial behavior, use only approved requirements; do not make up business rules to satisfy a test.
+
+### 3. Run the focused spec
+
+Pass an `--include` glob to test just the spec related to the change:
 
 ```bash
-ng e2e
+npx ng test --include="src/app/pages/products/product-catalog.component.spec.ts" --watch=false
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Replace the path with the spec being changed. `--watch=false` makes the command finish after one run, which is useful for an edit/verify loop and CI.
+
+### 4. Run the complete unit-test suite
+
+Before considering the change complete, run every unit test:
+
+```bash
+npx ng test --watch=false
+```
+
+For interactive development, omit `--watch=false`; in a TTY, Angular CLI watches for changes by default. To collect a coverage report when useful:
+
+```bash
+npx ng test --watch=false --coverage
+```
+
+Review coverage as a guide to missed cases, not as proof that behavior is correct. Unit tests do not establish backend authorization, persistence, concurrency, or legal/financial correctness.
+
+## Application build workflow
+
+### 1. Develop and check the web app
+
+Start the development server while working on the UI:
+
+```bash
+npm start
+```
+
+Open `http://localhost:4200/` and verify the changed workflow in the browser, including relevant navigation and responsive behavior.
+
+### 2. Create a production web build
+
+Run the standard build after application changes:
+
+```bash
+npm run build
+```
+
+This runs `ng build`. The Angular workspace defaults this target to the production configuration, which optimizes output and checks the configured bundle and component-style budgets. The generated browser application is under `dist/stockflow/browser/`. A development build can be checked separately with `npx ng build --configuration development`; `npm run watch` rebuilds the development configuration when files change.
+
+### 3. Build and package Electron when desktop behavior is affected
+
+Build the Angular renderer with relative asset URLs for loading from a packaged file:
+
+```bash
+npm run electron:build:web
+```
+
+The renderer output is under `dist/stockflow-electron/browser/`. Then choose the required desktop check:
+
+```bash
+npm run electron:dev
+npm run electron:pack
+npm run electron:make
+```
+
+`electron:dev` starts the development server and Electron together. `electron:pack` creates an unpacked local package; `electron:make` creates the configured Windows installer. Packaging success does not replace launching the desktop build and checking the changed workflow.
+
+### GitHub Actions CI
+
+Two workflows run automatically on every push and pull request, and can also be started manually from the GitHub Actions tab:
+
+- [`AngularTests`](./.github/workflows/AngularTests.yml) runs the Angular frontend unit tests.
+- [`BuildDevelop`](./.github/workflows/BuildDevelop.yml) builds the production web app and Electron renderer, creates a Windows Electron installer, and uploads downloadable artifacts retained for 14 days.
+
+To use it, push this workflow to GitHub, then open the repository's **Actions** tab to follow job results and download artifacts. Pull requests show the workflow status as a required/failed check; branch protection can be configured in GitHub repository settings if merges should be blocked when checks fail.
+
+### Recommended verification sequence
+
+1. Run the focused unit-test spec.
+2. Run the complete unit-test suite.
+3. Run `npm run build`.
+4. If Electron packaging, its configuration, or shared renderer behavior changed, also run `npm run electron:build:web` and the relevant desktop startup or packaging check.
+5. Report any checks that could not run and the concrete reason.
+
+This repository does not currently configure an end-to-end test target, so `ng e2e` is not part of the available verification workflow.
 
 ## Additional Resources
 
