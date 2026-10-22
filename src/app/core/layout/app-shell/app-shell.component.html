@@ -1,0 +1,30 @@
+<div class="workspace-shell">
+  <a class="workspace-shell__skip-link" href="#main-content">
+    {{ 'workspace.skipToContent' | translate }}
+  </a>
+
+  <app-topbar
+    [menuExpanded]="menuExpanded()"
+    (menuToggle)="toggleMenu()"
+    (logout)="leaveWorkspace()"
+  />
+
+  <div class="workspace-shell__body">
+    @if (menuExpanded()) {
+      <button
+        class="workspace-shell__scrim"
+        type="button"
+        [attr.aria-label]="'workspace.closeNavigation' | translate"
+        (click)="closeMenu()"
+      ></button>
+    }
+
+    <app-sidebar [expanded]="menuExpanded()" (navigate)="closeMenu()" />
+
+    <main class="workspace-shell__main" id="main-content" tabindex="-1">
+      <router-outlet />
+    </main>
+  </div>
+
+  <app-footer />
+</div>

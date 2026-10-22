@@ -1,0 +1,31 @@
+:host {
+  display: inline-flex;
+}
+
+.theme-toggle {
+  background: var(--sf-color-surface);
+  border: 1px solid var(--sf-color-border);
+  border-radius: var(--sf-radius-control);
+  color: var(--sf-color-text);
+  cursor: pointer;
+  display: grid;
+  flex: 0 0 auto;
+  height: var(--sf-control-size);
+  padding: 0;
+  place-items: center;
+  width: var(--sf-control-size);
+}
+
+.theme-toggle:hover {
+  background: var(--sf-color-surface-subtle);
+}
+
+.theme-toggle svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--sf-color-focus);
+  outline-offset: 3px;
+}

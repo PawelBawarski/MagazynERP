@@ -1,0 +1,53 @@
+.dashboard {
+  margin-inline: auto;
+  max-width: var(--sf-content-width);
+}
+
+.dashboard__header {
+  margin-bottom: var(--sf-space-8);
+}
+
+.dashboard__eyebrow {
+  color: var(--sf-color-accent);
+  font-size: var(--sf-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 var(--sf-space-2);
+  text-transform: uppercase;
+}
+
+.dashboard__header h1 {
+  color: var(--sf-color-text);
+  font-size: clamp(var(--sf-font-size-2xl), 4vw, var(--sf-font-size-3xl));
+  letter-spacing: -0.045em;
+  margin: 0;
+}
+
+.dashboard__description {
+  color: var(--sf-color-text-muted);
+  font-size: var(--sf-font-size-md);
+  line-height: 1.65;
+  margin: var(--sf-space-3) 0 0;
+  max-width: 42rem;
+}
+
+.dashboard__welcome {
+  background: var(--sf-color-surface);
+  border: 1px solid var(--sf-color-border);
+  border-radius: var(--sf-radius-card);
+  box-shadow: var(--sf-shadow-card);
+  max-width: 52rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.dashboard__welcome h2 {
+  color: var(--sf-color-text);
+  font-size: var(--sf-font-size-xl);
+  margin: 0;
+}
+
+.dashboard__welcome p {
+  color: var(--sf-color-text-muted);
+  line-height: 1.7;
+  margin: var(--sf-space-3) 0 0;
+}

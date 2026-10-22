@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" fill="none">
+  <defs>
+    <linearGradient id="wall" x1="960" y1="0" x2="960" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#415B50"/>
+      <stop offset="1" stop-color="#213B32"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="960" y1="620" x2="960" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#496256"/>
+      <stop offset="1" stop-color="#192D27"/>
+    </linearGradient>
+    <linearGradient id="light" x1="960" y1="0" x2="960" y2="810" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D6E8C5" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#D6E8C5" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grain" width="96" height="96" patternUnits="userSpaceOnUse">
+      <circle cx="11" cy="13" r="1" fill="#E7F1DC" fill-opacity=".12"/>
+      <circle cx="67" cy="59" r="1" fill="#E7F1DC" fill-opacity=".09"/>
+      <circle cx="39" cy="82" r=".8" fill="#E7F1DC" fill-opacity=".1"/>
+    </pattern>
+  </defs>
+  <path fill="url(#wall)" d="M0 0h1920v795H0z"/>
+  <path fill="url(#light)" d="M720 0h480l350 795H370L720 0Z"/>
+  <path fill="#263F36" d="M0 128h620v30H0zm1300 0h620v30h-620z"/>
+  <path fill="#C6D9B3" fill-opacity=".58" d="M790 46h340v8H790zm-16 92h370v7H774zm-38 114h446v6H736zm-48 132h540v6H688zm-66 161h672v6H622z"/>
+  <g stroke="#152B24" stroke-width="24">
+    <path d="M98 88v684M562 88v684M1260 88v684M1822 88v684"/>
+    <path d="M80 271h501M80 478h501M80 686h501M1240 271h601M1240 478h601M1240 686h601"/>
+  </g>
+  <g fill="#B67849">
+    <path d="M130 171h176v82H130zm198 0h198v82H328zM130 378h176v83H130zm198 0h198v83H328zM130 585h176v83H130zm198 0h198v83H328z"/>
+    <path d="M1310 171h225v82h-225zm247 0h241v82h-241zm-247 207h225v83h-225zm247 0h241v83h-241zm-247 207h225v83h-225zm247 0h241v83h-241z"/>
+  </g>
+  <g fill="#D29A66">
+    <path d="M151 189h131v7H151zm197 0h151v7H348zm980 0h186v7h-186zm247 0h203v7h-203zM151 397h131v7H151zm197 0h151v7H348zm980 0h186v7h-186zm247 0h203v7h-203zM151 604h131v7H151zm197 0h151v7H348zm980 0h186v7h-186zm247 0h203v7h-203z"/>
+  </g>
+  <path fill="url(#floor)" d="M0 795h1920v405H0z"/>
+  <path stroke="#C9D8C4" stroke-opacity=".16" stroke-width="5" d="m0 1197 618-402m1302 402-618-402M394 1200l297-405m835 405-297-405M0 930h1920"/>
+  <path fill="url(#grain)" d="M0 0h1920v1200H0z" opacity=".7"/>
+</svg>

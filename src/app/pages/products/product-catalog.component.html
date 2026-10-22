@@ -1,0 +1,210 @@
+<section class="products" aria-labelledby="products-title">
+  <header class="products__header">
+    <div>
+      <p class="products__eyebrow">{{ 'products.eyebrow' | translate }}</p>
+      <h1 id="products-title">{{ 'products.title' | translate }}</h1>
+      <p class="products__description">{{ 'products.description' | translate }}</p>
+    </div>
+    @if (canCreateProducts()) {
+      <button
+        class="products__button products__button--primary"
+        type="button"
+        (click)="openAddForm()"
+      >
+        {{ 'products.add' | translate }}
+      </button>
+    }
+  </header>
+
+  @if (errorKey(); as error) {
+    <p class="products__message products__message--error" role="alert">{{ error | translate }}</p>
+  }
+  @if (successKey(); as success) {
+    <p class="products__message products__message--success" role="status">
+      {{ success | translate }}
+    </p>
+  }
+
+  <p class="products__demo-notice" role="note">
+    {{ 'products.demoNotice' | translate }}
+  </p>
+
+  <dialog
+    #productDialog
+    class="products__dialog"
+    aria-labelledby="product-dialog-title"
+    (close)="resetAfterDialogClose()"
+  >
+    <h2 id="product-dialog-title">
+      {{ (editingProductId() ? 'products.editTitle' : 'products.addTitle') | translate }}
+    </h2>
+    <form class="products__form" [formGroup]="productForm" (ngSubmit)="saveProduct()" novalidate>
+      <div class="products__form-field">
+        <label for="product-sku">{{ 'products.sku' | translate }}</label>
+        <p class="products__field-hint" id="product-sku-help">
+          {{ 'products.skuHint' | translate }}
+        </p>
+        <input
+          id="product-sku"
+          formControlName="sku"
+          required
+          [attr.aria-invalid]="fieldError('sku') !== null"
+          [attr.aria-describedby]="
+            fieldError('sku') ? 'product-sku-help product-sku-error' : 'product-sku-help'
+          "
+        />
+        @if (fieldError('sku'); as error) {
+          <span class="products__field-error" id="product-sku-error">{{ error | translate }}</span>
+        }
+      </div>
+
+      <div class="products__form-field">
+        <label for="product-name">{{ 'products.name' | translate }}</label>
+        <input
+          id="product-name"
+          formControlName="name"
+          required
+          [attr.aria-invalid]="fieldError('name') !== null"
+          [attr.aria-describedby]="fieldError('name') ? 'product-name-error' : null"
+        />
+        @if (fieldError('name'); as error) {
+          <span class="products__field-error" id="product-name-error">{{ error | translate }}</span>
+        }
+      </div>
+
+      <div class="products__form-field">
+        <label for="product-category">{{ 'products.category' | translate }}</label>
+        <input
+          id="product-category"
+          formControlName="category"
+          required
+          [attr.aria-invalid]="fieldError('category') !== null"
+          [attr.aria-describedby]="fieldError('category') ? 'product-category-error' : null"
+        />
+        @if (fieldError('category'); as error) {
+          <span class="products__field-error" id="product-category-error">{{
+            error | translate
+          }}</span>
+        }
+      </div>
+
+      <div class="products__form-field">
+        <label for="product-unit">{{ 'products.unit' | translate }}</label>
+        <input
+          id="product-unit"
+          formControlName="unit"
+          required
+          [attr.aria-invalid]="fieldError('unit') !== null"
+          [attr.aria-describedby]="fieldError('unit') ? 'product-unit-error' : null"
+        />
+        @if (fieldError('unit'); as error) {
+          <span class="products__field-error" id="product-unit-error">{{ error | translate }}</span>
+        }
+      </div>
+
+      <div class="products__form-field">
+        <label for="product-status">{{ 'products.status' | translate }}</label>
+        <select
+          id="product-status"
+          formControlName="isActive"
+          required
+          [attr.aria-invalid]="fieldError('isActive') !== null"
+          [attr.aria-describedby]="fieldError('isActive') ? 'product-status-error' : null"
+        >
+          <option value="" disabled>{{ 'products.selectStatus' | translate }}</option>
+          <option value="active">{{ 'products.active' | translate }}</option>
+          <option value="inactive">{{ 'products.inactive' | translate }}</option>
+        </select>
+        @if (fieldError('isActive'); as error) {
+          <span class="products__field-error" id="product-status-error">{{
+            error | translate
+          }}</span>
+        }
+      </div>
+
+      <div class="products__form-actions">
+        <button class="products__button products__button--primary" type="submit">
+          {{ 'products.save' | translate }}
+        </button>
+        <button
+          class="products__button products__button--secondary"
+          type="button"
+          (click)="closeForm()"
+        >
+          {{ 'products.cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="products__toolbar">
+    <label for="product-search">{{ 'products.searchLabel' | translate }}</label>
+    <input
+      id="product-search"
+      type="search"
+      #searchInput
+      [value]="search()"
+      [placeholder]="'products.searchPlaceholder' | translate"
+      (input)="setSearch(searchInput.value)"
+    />
+    <p class="products__count" aria-live="polite">
+      {{ 'products.resultCount' | translate: { count: filteredProducts().length } }}
+    </p>
+  </div>
+
+  @if (filteredProducts().length) {
+    <div class="products__table-wrap">
+      <table>
+        <caption>
+          {{
+            'products.tableLabel' | translate
+          }}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{{ 'products.sku' | translate }}</th>
+            <th scope="col">{{ 'products.name' | translate }}</th>
+            <th scope="col">{{ 'products.category' | translate }}</th>
+            <th scope="col">{{ 'products.unit' | translate }}</th>
+            <th scope="col">{{ 'products.status' | translate }}</th>
+            @if (canEditProducts()) {
+              <th scope="col">{{ 'products.actions' | translate }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of filteredProducts(); track product.id) {
+            <tr>
+              <td>{{ product.sku }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.unit }}</td>
+              <td>
+                <span
+                  class="products__status"
+                  [class.products__status--inactive]="!product.isActive"
+                >
+                  {{ (product.isActive ? 'products.active' : 'products.inactive') | translate }}
+                </span>
+              </td>
+              @if (canEditProducts()) {
+                <td>
+                  <button
+                    class="products__button products__button--secondary"
+                    type="button"
+                    [attr.aria-label]="editLabel(product.name)"
+                    (click)="openEditForm(product)"
+                  >
+                    {{ 'products.edit' | translate }}
+                  </button>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p class="products__empty" role="status">{{ 'products.noResults' | translate }}</p>
+  }
+</section>

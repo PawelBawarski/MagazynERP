@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.workspace-footer {
+  align-items: center;
+  border-top: 1px solid var(--sf-color-border);
+  color: var(--sf-color-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--sf-font-size-xs);
+  gap: var(--sf-space-2) var(--sf-space-4);
+  justify-content: space-between;
+  padding: 0.85rem clamp(1rem, 2vw, 1.75rem);
+}
+
+@media (max-width: 600px) {
+  .workspace-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

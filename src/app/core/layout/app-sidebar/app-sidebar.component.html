@@ -1,0 +1,52 @@
+<nav
+  class="sidebar"
+  [class.sidebar--expanded]="expanded()"
+  [class.sidebar--collapsed]="!expanded()"
+  id="workspace-navigation"
+  [attr.aria-label]="'workspace.primaryNavigation' | translate"
+>
+  <p class="sidebar__heading">{{ 'workspace.navigation' | translate }}</p>
+  <a
+    class="sidebar__link"
+    routerLink="/app/dashboard"
+    routerLinkActive="sidebar__link--active"
+    ariaCurrentWhenActive="page"
+    [title]="expanded() ? '' : ('workspace.dashboard' | translate)"
+    (click)="navigate.emit()"
+  >
+    <svg lucideLayoutDashboard aria-hidden="true" [size]="19" />
+    @if (expanded()) {
+      <span>{{ 'workspace.dashboard' | translate }}</span>
+    }
+  </a>
+  @if (canManageUsers()) {
+    <a
+      class="sidebar__link"
+      routerLink="/app/users"
+      routerLinkActive="sidebar__link--active"
+      ariaCurrentWhenActive="page"
+      [title]="expanded() ? '' : ('users.navigation' | translate)"
+      (click)="navigate.emit()"
+    >
+      <svg lucideUsers aria-hidden="true" [size]="19" />
+      @if (expanded()) {
+        <span>{{ 'users.navigation' | translate }}</span>
+      }
+    </a>
+  }
+  @if (canReadProductCatalog()) {
+    <a
+      class="sidebar__link"
+      routerLink="/app/products"
+      routerLinkActive="sidebar__link--active"
+      ariaCurrentWhenActive="page"
+      [title]="expanded() ? '' : ('products.navigation' | translate)"
+      (click)="navigate.emit()"
+    >
+      <svg lucidePackage aria-hidden="true" [size]="19" />
+      @if (expanded()) {
+        <span>{{ 'products.navigation' | translate }}</span>
+      }
+    </a>
+  }
+</nav>

@@ -1,0 +1,161 @@
+{
+  "common": {
+    "language": "Language",
+    "dismiss": "Dismiss notification",
+    "switchToDarkMode": "Switch to dark mode",
+    "switchToLightMode": "Switch to light mode"
+  },
+  "login": {
+    "eyebrow": "Logistics, under control",
+    "welcome": "A warehouse that works with you.",
+    "description": "Continue to your workspace and use the StockFlow application.",
+    "account": "Application access",
+    "title": "Welcome back",
+    "signInPrompt": "Enter your details to continue.",
+    "email": "Email address",
+    "emailPlaceholder": "name@company.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Continue",
+    "secureAccess": "StockFlow workspace",
+    "footer": "© 2026 {{company}} · version {{version}}",
+    "systemLabel": "WAREHOUSE WORKSPACE"
+  },
+  "validation": {
+    "emailRequired": "Enter your email address.",
+    "emailInvalid": "Enter a valid email address.",
+    "passwordRequired": "Enter your password."
+  },
+  "errors": {
+    "network": "Unable to reach the server. Check your connection and try again.",
+    "unauthorized": "Access denied or your session has expired. Sign in again.",
+    "forbidden": "You do not have permission to perform this operation.",
+    "server": "A server error occurred. Please try again later.",
+    "generic": "The request could not be completed. Please try again.",
+    "details": "View details"
+  },
+  "errorPages": {
+    "400": {
+      "title": "Invalid request",
+      "description": "The server could not process the request. Check the details and try again."
+    },
+    "401": {
+      "title": "Sign-in required",
+      "description": "This operation requires an active session. Sign in to continue."
+    },
+    "403": {
+      "title": "Access denied",
+      "description": "Your account does not have access to this resource. Contact an administrator if you think this is a mistake."
+    },
+    "404": {
+      "title": "Page not found",
+      "description": "The address is incorrect or the page may have moved."
+    },
+    "500": {
+      "title": "Something went wrong",
+      "description": "An unexpected server error occurred. Please try again later."
+    },
+    "backToLogin": "Back to sign in",
+    "errorCode": "Error code"
+  },
+  "workspace": {
+    "closeNavigation": "Close navigation menu",
+    "dashboard": "Dashboard",
+    "dashboardDescription": "This is the main workspace. We will add future modules as separate, accessible features.",
+    "dashboardEyebrow": "Workspace",
+    "leaveWorkspace": "Leave workspace",
+    "navigation": "Navigation",
+    "openNavigation": "Open navigation menu",
+    "primaryNavigation": "Primary navigation",
+    "skipToContent": "Skip to content",
+    "workspaceDescription": "Agreed StockFlow features will appear here. For now, the app does not show sample business data.",
+    "workspaceTitle": "Welcome to your workspace"
+  },
+  "users": {
+    "title": "Employees",
+    "description": "Browse and manage employee accounts.",
+    "addUser": "Add employee",
+    "addSuccess": "The employee has been added.",
+    "cancel": "Cancel",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "position": "Position",
+    "status": "Active",
+    "actions": "Actions",
+    "active": "Active",
+    "inactive": "Inactive",
+    "deactivate": "Deactivate",
+    "deactivateSuccess": "The employee has been deactivated.",
+    "deactivateNamed": "Deactivate employee {{name}}",
+    "searchLabel": "Search employees",
+    "searchPlaceholder": "Name or position",
+    "filterStatus": "Filter by status",
+    "allStatuses": "All employees",
+    "activeOnly": "Active",
+    "inactiveOnly": "Inactive",
+    "reportCsv": "Download CSV",
+    "reportPdf": "Print / save as PDF",
+    "tableLabel": "Employee list",
+    "navigation": "Employees",
+    "noUsers": "No employees to display.",
+    "loadingMore": "Scroll the list to load more employees.",
+    "loadMore": "Load more",
+    "loadedCount": "Showing {{loaded}} of {{total}} employees",
+    "required": "This field is required.",
+    "selectPosition": "Select a position",
+    "save": "Add employee",
+    "reportTitle": "Employee report",
+    "errors": {
+      "load": "Unable to load employees.",
+      "save": "Unable to add the employee.",
+      "deactivate": "Unable to deactivate the employee.",
+      "notFound": "Employee not found.",
+      "alreadyInactive": "This employee is already inactive.",
+      "invalidInput": "Check the entered information."
+    },
+    "roles": {
+      "administrator": "Administrator",
+      "office-worker": "Office worker",
+      "warehouse-clerk": "Warehouse clerk",
+      "warehouse-operative": "Warehouse operative"
+    }
+  },
+  "products": {
+    "eyebrow": "Catalog",
+    "title": "Products",
+    "description": "Browse demonstration products. Administrators and Office Workers can add and edit them.",
+    "demoNotice": "These are demonstration records. They are not saved and do not represent actual inventory.",
+    "searchLabel": "Search products",
+    "searchPlaceholder": "Code, name, category, or unit",
+    "resultCount": "Results: {{count}}",
+    "tableLabel": "Product list",
+    "add": "Add product",
+    "addTitle": "Add product",
+    "editTitle": "Edit product",
+    "save": "Save",
+    "cancel": "Cancel",
+    "skuHint": "SKU is required; duplicate codes are allowed.",
+    "sku": "Product code",
+    "name": "Name",
+    "category": "Category",
+    "unit": "Unit",
+    "status": "Status",
+    "selectStatus": "Select status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "actions": "Actions",
+    "edit": "Edit",
+    "editNamed": "Edit product {{name}}",
+    "addSuccess": "The product was added. The change exists only temporarily in this session.",
+    "updateSuccess": "The product was updated. The change exists only temporarily in this session.",
+    "noResults": "No products match your search.",
+    "navigation": "Products",
+    "errors": {
+      "forbidden": "Your role does not have permission to save products.",
+      "generic": "Unable to save the product.",
+      "invalidInput": "Complete the required fields with valid values.",
+      "notFound": "Product not found.",
+      "required": "This field is required."
+    }
+  }
+}

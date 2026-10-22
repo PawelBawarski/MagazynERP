@@ -1,0 +1,161 @@
+{
+  "common": {
+    "language": "Język",
+    "dismiss": "Zamknij komunikat",
+    "switchToDarkMode": "Włącz ciemny motyw",
+    "switchToLightMode": "Włącz jasny motyw"
+  },
+  "login": {
+    "eyebrow": "Logistyka pod kontrolą",
+    "welcome": "Magazyn, który działa razem z Tobą.",
+    "description": "Przejdź do przestrzeni pracy i korzystaj z aplikacji StockFlow.",
+    "account": "Dostęp do aplikacji",
+    "title": "Witaj ponownie",
+    "signInPrompt": "Wprowadź dane, aby przejść dalej.",
+    "email": "Adres e-mail",
+    "emailPlaceholder": "imie@firma.pl",
+    "password": "Hasło",
+    "passwordPlaceholder": "Wpisz swoje hasło",
+    "submit": "Kontynuuj",
+    "secureAccess": "Przestrzeń pracy StockFlow",
+    "footer": "© 2026 {{company}} · wersja {{version}}",
+    "systemLabel": "PRZESTRZEŃ MAGAZYNOWA"
+  },
+  "validation": {
+    "emailRequired": "Podaj adres e-mail.",
+    "emailInvalid": "Wpisz poprawny adres e-mail.",
+    "passwordRequired": "Podaj hasło."
+  },
+  "errors": {
+    "network": "Nie można połączyć się z serwerem. Sprawdź połączenie i spróbuj ponownie.",
+    "unauthorized": "Brak dostępu lub sesja wygasła. Zaloguj się ponownie.",
+    "forbidden": "Nie masz uprawnień do wykonania tej operacji.",
+    "server": "Wystąpił błąd serwera. Spróbuj ponownie później.",
+    "generic": "Nie udało się wykonać żądania. Spróbuj ponownie.",
+    "details": "Zobacz szczegóły"
+  },
+  "errorPages": {
+    "400": {
+      "title": "Nieprawidłowe żądanie",
+      "description": "Serwer nie mógł przetworzyć żądania. Sprawdź dane i spróbuj ponownie."
+    },
+    "401": {
+      "title": "Wymagane logowanie",
+      "description": "Ta operacja wymaga aktywnej sesji. Zaloguj się, aby kontynuować."
+    },
+    "403": {
+      "title": "Brak dostępu",
+      "description": "Twoje konto nie ma dostępu do tego zasobu. Jeśli uważasz, że to pomyłka, skontaktuj się z administratorem."
+    },
+    "404": {
+      "title": "Nie znaleziono strony",
+      "description": "Podany adres jest nieprawidłowy albo strona została przeniesiona."
+    },
+    "500": {
+      "title": "Coś poszło nie tak",
+      "description": "Wystąpił nieoczekiwany błąd serwera. Spróbuj ponownie później."
+    },
+    "backToLogin": "Wróć do logowania",
+    "errorCode": "Kod błędu"
+  },
+  "workspace": {
+    "closeNavigation": "Zamknij menu nawigacyjne",
+    "dashboard": "Pulpit",
+    "dashboardDescription": "To główny obszar roboczy aplikacji. Kolejne moduły będziemy dodawać jako osobne, dostępne funkcje.",
+    "dashboardEyebrow": "Obszar roboczy",
+    "leaveWorkspace": "Opuść obszar roboczy",
+    "navigation": "Nawigacja",
+    "openNavigation": "Otwórz menu nawigacyjne",
+    "primaryNavigation": "Nawigacja główna",
+    "skipToContent": "Przejdź do treści",
+    "workspaceDescription": "Tutaj pojawią się uzgodnione funkcje StockFlow. Na razie aplikacja nie pokazuje przykładowych danych biznesowych.",
+    "workspaceTitle": "Witaj w przestrzeni roboczej"
+  },
+  "users": {
+    "title": "Pracownicy",
+    "description": "Przeglądaj i zarządzaj pracownikami aplikacji.",
+    "addUser": "Dodaj pracownika",
+    "addSuccess": "Pracownik został dodany.",
+    "cancel": "Anuluj",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "position": "Stanowisko",
+    "status": "Aktywny",
+    "actions": "Akcje",
+    "active": "Aktywny",
+    "inactive": "Nieaktywny",
+    "deactivate": "Dezaktywuj",
+    "deactivateSuccess": "Pracownik został dezaktywowany.",
+    "deactivateNamed": "Dezaktywuj pracownika {{name}}",
+    "searchLabel": "Szukaj pracowników",
+    "searchPlaceholder": "Imię, nazwisko lub stanowisko",
+    "filterStatus": "Filtruj według statusu",
+    "allStatuses": "Wszyscy pracownicy",
+    "activeOnly": "Aktywni",
+    "inactiveOnly": "Nieaktywni",
+    "reportCsv": "Pobierz CSV",
+    "reportPdf": "Drukuj / zapisz PDF",
+    "tableLabel": "Lista pracowników",
+    "navigation": "Pracownicy",
+    "noUsers": "Brak pracowników do wyświetlenia.",
+    "loadingMore": "Przewiń listę, aby wczytać kolejnych pracowników.",
+    "loadMore": "Wczytaj więcej",
+    "loadedCount": "Wyświetlono {{loaded}} z {{total}} pracowników",
+    "required": "To pole jest wymagane.",
+    "selectPosition": "Wybierz stanowisko",
+    "save": "Dodaj pracownika",
+    "reportTitle": "Raport pracowników",
+    "errors": {
+      "load": "Nie udało się wczytać pracowników.",
+      "save": "Nie udało się dodać pracownika.",
+      "deactivate": "Nie udało się dezaktywować pracownika.",
+      "notFound": "Nie znaleziono pracownika.",
+      "alreadyInactive": "Ten pracownik jest już nieaktywny.",
+      "invalidInput": "Sprawdź wprowadzone dane."
+    },
+    "roles": {
+      "administrator": "Administrator",
+      "office-worker": "Pracownik biurowy",
+      "warehouse-clerk": "Magazynier",
+      "warehouse-operative": "Pracownik fizyczny"
+    }
+  },
+  "products": {
+    "eyebrow": "Kartoteka",
+    "title": "Produkty",
+    "description": "Przeglądaj demonstracyjne produkty. Administrator i Pracownik biurowy mogą je dodawać oraz edytować.",
+    "demoNotice": "To przykładowe dane demonstracyjne. Nie są zapisywane i nie przedstawiają rzeczywistego stanu magazynowego.",
+    "searchLabel": "Szukaj produktów",
+    "searchPlaceholder": "Kod, nazwa, kategoria lub jednostka",
+    "resultCount": "Liczba wyników: {{count}}",
+    "tableLabel": "Lista produktów",
+    "add": "Dodaj produkt",
+    "addTitle": "Dodaj produkt",
+    "editTitle": "Edytuj produkt",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "skuHint": "Kod SKU jest wymagany; duplikaty są dozwolone.",
+    "sku": "Kod produktu",
+    "name": "Nazwa",
+    "category": "Kategoria",
+    "unit": "Jednostka",
+    "status": "Status",
+    "selectStatus": "Wybierz status",
+    "active": "Aktywny",
+    "inactive": "Nieaktywny",
+    "actions": "Akcje",
+    "edit": "Edytuj",
+    "editNamed": "Edytuj produkt {{name}}",
+    "addSuccess": "Produkt został dodany. Zmiana istnieje tylko tymczasowo w tej sesji.",
+    "updateSuccess": "Produkt został zaktualizowany. Zmiana istnieje tylko tymczasowo w tej sesji.",
+    "noResults": "Brak produktów pasujących do wyszukiwania.",
+    "navigation": "Produkty",
+    "errors": {
+      "forbidden": "Twoja rola nie ma uprawnień do zapisu produktów.",
+      "generic": "Nie udało się zapisać produktu.",
+      "invalidInput": "Uzupełnij wymagane pola poprawnymi wartościami.",
+      "notFound": "Nie znaleziono produktu.",
+      "required": "To pole jest wymagane."
+    }
+  }
+}

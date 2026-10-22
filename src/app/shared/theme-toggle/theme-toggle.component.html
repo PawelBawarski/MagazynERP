@@ -1,0 +1,17 @@
+<button
+  class="theme-toggle"
+  type="button"
+  [attr.aria-label]="
+    (theme() === 'light' ? 'common.switchToDarkMode' : 'common.switchToLightMode') | translate
+  "
+  [attr.title]="
+    (theme() === 'light' ? 'common.switchToDarkMode' : 'common.switchToLightMode') | translate
+  "
+  (click)="toggleTheme()"
+>
+  @if (theme() === 'light') {
+    <svg lucideMoon aria-hidden="true" [size]="20" />
+  } @else {
+    <svg lucideSun aria-hidden="true" [size]="20" />
+  }
+</button>

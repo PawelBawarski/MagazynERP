@@ -1,0 +1,38 @@
+<header class="topbar">
+  <div class="topbar__primary">
+    <button
+      class="topbar__menu-button"
+      type="button"
+      [attr.aria-expanded]="menuExpanded()"
+      aria-controls="workspace-navigation"
+      [attr.aria-label]="
+        (menuExpanded() ? 'workspace.closeNavigation' : 'workspace.openNavigation') | translate
+      "
+      (click)="menuToggle.emit()"
+    >
+      <svg lucideMenu aria-hidden="true" [size]="21" />
+    </button>
+    <a class="topbar__brand" routerLink="/app/dashboard">{{ companyName }}</a>
+  </div>
+
+  <div class="topbar__actions">
+    <label class="topbar__language">
+      <span class="visually-hidden">{{ 'common.language' | translate }}</span>
+      <select [value]="language()" (change)="setLanguage($event)">
+        <option value="pl">PL</option>
+        <option value="en">EN</option>
+      </select>
+    </label>
+    <app-theme-toggle />
+    <button
+      class="topbar__logout"
+      type="button"
+      [attr.aria-label]="'workspace.leaveWorkspace' | translate"
+      [attr.title]="'workspace.leaveWorkspace' | translate"
+      (click)="logout.emit()"
+    >
+      <svg lucideLogOut aria-hidden="true" [size]="19" />
+      <span>{{ 'workspace.leaveWorkspace' | translate }}</span>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,26 @@
+<main class="error-page">
+  <div class="error-page__backdrop" aria-hidden="true"></div>
+
+  <header class="error-header">
+    <a class="error-brand" routerLink="/" aria-label="StockFlow">
+      <span class="error-brand__mark" aria-hidden="true">S</span>
+      <span>StockFlow</span>
+    </a>
+    <app-theme-toggle />
+  </header>
+
+  <section class="error-card" aria-labelledby="error-title">
+    <p class="error-card__code">
+      <span>{{ 'errorPages.errorCode' | translate }}</span>
+      <strong>{{ status() }}</strong>
+    </p>
+    <div class="error-card__divider" aria-hidden="true"></div>
+    <h1 id="error-title">{{ titleKey() | translate }}</h1>
+    <p class="error-card__description">{{ descriptionKey() | translate }}</p>
+    <a class="error-card__action" routerLink="/login" (click)="clearNotification()">
+      {{ 'errorPages.backToLogin' | translate }}
+    </a>
+  </section>
+
+  <footer class="error-footer">StockFlow · 0.0.1</footer>
+</main>
